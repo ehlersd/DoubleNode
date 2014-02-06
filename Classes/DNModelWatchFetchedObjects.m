@@ -11,12 +11,13 @@
 @interface DNModelWatchFetchedObjects () <NSFetchedResultsControllerDelegate>
 {
     NSFetchRequest*             fetchRequest;
-    NSFetchedResultsController* fetchResultsController;
 }
 
 @end
 
 @implementation DNModelWatchFetchedObjects
+
+@synthesize fetchedResultsController;
 
 + (id)watchWithModel:(DNModel*)model
             andFetch:(NSFetchRequest*)fetch
@@ -32,11 +33,11 @@
     {
         fetchRequest    = fetch;
         
-        fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                     managedObjectContext:[[model class] managedObjectContext]
-                                                                       sectionNameKeyPath:nil
-                                                                                cacheName:nil];     // NSStringFromClass([self class])];
-        fetchResultsController.delegate = self;
+        fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                       managedObjectContext:[[model class] managedObjectContext]
+                                                                         sectionNameKeyPath:nil
+                                                                                  cacheName:nil];     // NSStringFromClass([self class])];
+        fetchedResultsController.delegate = self;
     }
     
     return self;
@@ -44,7 +45,7 @@
 
 - (NSArray*)objects
 {
-    return fetchResultsController.fetchedObjects;
+    return fetchedResultsController.fetchedObjects;
 }
 
 - (void)startWatch
@@ -64,7 +65,7 @@
     [super cancelWatch];
     
     fetchRequest            = nil;
-    fetchResultsController  = nil;
+    fetchedResultsController  = nil;
 }
 
 - (void)refreshWatch
@@ -73,9 +74,9 @@
     
     NSError*    error = nil;
     
-    fetchResultsController.fetchRequest.resultType = NSManagedObjectResultType;
+    fetchedResultsController.fetchRequest.resultType = NSManagedObjectResultType;
     
-    BOOL    result = [fetchResultsController performFetch:&error];
+    BOOL    result = [fetchedResultsController performFetch:&error];
     if (result == NO)
     {
         DLog(LL_Error, LD_CoreData, @"error=%@", [error localizedDescription]);
