@@ -14,6 +14,8 @@
 
 @interface DNModelWatchFetchedObjects : DNModelWatchObjects
 
+@property (nonatomic, retain) NSFetchedResultsController* fetchedResultsController;
+
 + (id)watchWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch;
 
 - (id)initWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch;
