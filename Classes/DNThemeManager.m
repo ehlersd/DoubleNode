@@ -321,7 +321,16 @@
     imgView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
     imgView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
 
+    imgView.layer.cornerRadius  = [[[self class] performThemeSelectorForAttribute:@"CornerRadius" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    
     imgView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    
+    if ([[[self class] performThemeSelectorForAttribute:@"MakeCircle" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item] boolValue])
+    {
+        CGFloat minDiameter = MIN(imgView.bounds.size.width, imgView.bounds.size.height);
+        imgView.layer.cornerRadius =  minDiameter / 2.0f;
+        imgView.layer.masksToBounds = YES;
+    }
 }
 
 + (void)customizeButton:(UIButton*)btnView
