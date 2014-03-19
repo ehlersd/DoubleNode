@@ -362,6 +362,18 @@
     [self saveContext];
 }
 
+#pragma mark - Entity API connection hooks
+
+- (void)saveViaAPI
+{
+    
+}
+
+- (void)deleteViaAPI
+{
+    
+}
+
 #pragma mark - Entity Description functions
 
 - (NSEntityDescription*)entityDescription

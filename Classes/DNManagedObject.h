@@ -109,6 +109,11 @@
 - (void)deleteWithNoSave;
 - (void)delete;
 
+#pragma mark - Entity API connection hooks
+
+- (void)saveViaAPI;
+- (void)deleteViaAPI;
+
 - (NSEntityDescription*)entityDescription;
 
 #pragma mark - deleteAll
